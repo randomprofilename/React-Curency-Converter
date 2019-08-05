@@ -47,8 +47,7 @@ class CurenciesPage extends Component {
             case "Table":
                 return <CurenciesListTable rates={this.state.rates} />;
             case "Cards":
-                return <CurenciesListCards 
-                    rates={this.state.rates} />;
+                return <CurenciesListCards baseCurrency={this.state.baseCurrency} rates={this.state.rates} />;
             default:
                 console.log("Something bad");
         }

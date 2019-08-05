@@ -1,20 +1,19 @@
 import React, { Component } from "react";
+import { Card } from "semantic-ui-react";
 import CurrencyCard from "./CurrencyCard";
 
 class CurrenciesListCards extends Component {
     render() {
-        const { rates = {} } = this.props;
+        const { rates = {}, baseCurrency } = this.props;
 
-        return <div style={{
-            display: "flex", 
-            justifyContent: "space-between",
-            flexWrap: "wrap" 
-        }}>
+        return <Card.Group centered >
             {
-                Object.keys(rates).map((currency, index) => 
-                    <CurrencyCard key={index} name={currency} rate={rates[currency]} />)          
+                Object.keys(rates)
+                    .filter(currency => currency !== baseCurrency)
+                    .map((currency, index) => 
+                        <CurrencyCard key={index} baseCurrency={baseCurrency} name={currency} rate={rates[currency]} />)          
             }
-        </div>
+        </Card.Group>
     }
 }
 
