@@ -30,7 +30,8 @@ class CurenciesPage extends Component {
     }
 
     async loadRates(baseCurrency) {
-        const {data: { rates }} = await getLatest(baseCurrency);
+        const { rates } = await getLatest(baseCurrency);
+        
         this.setState({ rates, currencies: Object.keys(rates), isLoading: false  });
     }
 
