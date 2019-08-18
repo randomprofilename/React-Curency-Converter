@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "0555dbc5fe6127ed76f59f7caeb4a519",
+    "revision": "9dcd6ac9767291e3dbfb09fd111cb1d2",
     "url": "/React-Curency-Converter/index.html"
   },
   {
@@ -8,15 +8,15 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/React-Curency-Converter/static/css/2.ab347b72.chunk.css"
   },
   {
-    "revision": "b0d0fefc14f9bcc8c90d",
-    "url": "/React-Curency-Converter/static/css/main.f644f6e4.chunk.css"
+    "revision": "ec05970731efb742dc41",
+    "url": "/React-Curency-Converter/static/css/main.498d002a.chunk.css"
   },
   {
     "revision": "c2992d119fb53805cfb4",
     "url": "/React-Curency-Converter/static/js/2.9873b6b2.chunk.js"
   },
   {
-    "revision": "b0d0fefc14f9bcc8c90d",
+    "revision": "ec05970731efb742dc41",
     "url": "/React-Curency-Converter/static/js/main.6bf949e4.chunk.js"
   },
   {

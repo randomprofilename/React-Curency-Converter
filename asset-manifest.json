@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/React-Curency-Converter/static/css/main.f644f6e4.chunk.css",
+    "main.css": "/React-Curency-Converter/static/css/main.498d002a.chunk.css",
     "main.js": "/React-Curency-Converter/static/js/main.6bf949e4.chunk.js",
     "main.js.map": "/React-Curency-Converter/static/js/main.6bf949e4.chunk.js.map",
     "runtime~main.js": "/React-Curency-Converter/static/js/runtime~main.664553ee.js",
@@ -9,10 +9,10 @@
     "static/js/2.9873b6b2.chunk.js": "/React-Curency-Converter/static/js/2.9873b6b2.chunk.js",
     "static/js/2.9873b6b2.chunk.js.map": "/React-Curency-Converter/static/js/2.9873b6b2.chunk.js.map",
     "index.html": "/React-Curency-Converter/index.html",
-    "precache-manifest.8063135f654c0a0379f0b8295a23b237.js": "/React-Curency-Converter/precache-manifest.8063135f654c0a0379f0b8295a23b237.js",
+    "precache-manifest.5f9e81652258a4c37088b0387f5adfad.js": "/React-Curency-Converter/precache-manifest.5f9e81652258a4c37088b0387f5adfad.js",
     "service-worker.js": "/React-Curency-Converter/service-worker.js",
     "static/css/2.ab347b72.chunk.css.map": "/React-Curency-Converter/static/css/2.ab347b72.chunk.css.map",
-    "static/css/main.f644f6e4.chunk.css.map": "/React-Curency-Converter/static/css/main.f644f6e4.chunk.css.map",
+    "static/css/main.498d002a.chunk.css.map": "/React-Curency-Converter/static/css/main.498d002a.chunk.css.map",
     "static/media/semantic.less": "/React-Curency-Converter/static/media/outline-icons.ef60a4f6.woff"
   }
 }
