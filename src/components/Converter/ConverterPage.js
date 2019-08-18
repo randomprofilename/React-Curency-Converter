@@ -4,7 +4,9 @@ import { Segment } from "semantic-ui-react";
 
 const ConverterPage = () => (
   <>
-    <h1> ConverterPage </h1>
+    <Segment>
+      <h1> ConverterPage </h1>
+    </Segment>
     <Segment>
       <ConverterTile />
     </Segment>

@@ -5,6 +5,7 @@ import CurrencySelector from "./CurrencySelector";
 import ComponentSelector from "./ComponentSelector";
 import { getLatest } from "../../api/ratesApi";
 import { Segment, Loader } from "semantic-ui-react";
+import { getAll } from "../../api/countriesApi";
 
 class CurenciesPage extends Component {
   state = { 
@@ -13,26 +14,46 @@ class CurenciesPage extends Component {
     currencies: [],
     rates: {},
     components: [ "Cards", "Table" ],
-    baseComponent: "Cards"
+    baseComponent: "Cards",
+    countries: {}
   };
     
   async componentDidMount() {
-    const { baseCurrency } = this.state;
-    await this.loadRates(baseCurrency); 
+    await this.getExternalData()
   }
 
   async componentDidUpdate(_, prevState) {
     if (prevState.baseCurrency === this.state.baseCurrency)
       return;
+    await this.getExternalData();
+  }
 
-    const { baseCurrency } = this.state;
-    await this.loadRates(baseCurrency);
+  async getExternalData() {
+    const { baseCurrency, countries } = this.state;
+    const { rates } = await this.loadRates(baseCurrency);
+    if (Object.keys(countries).length !== 0)
+      return this.setState({ rates, currencies: Object.keys(rates), isLoading: false });
+
+    const countriesArray = await this.getcountries();
+    const currencyCodes = Object.keys(rates);
+    const countryByCurrencyCode = currencyCodes.reduce((acc, currencyCode) => {
+      const country = countriesArray.find(country => 
+        country.alpha3Code !== "ATA" 
+        && 
+        country.currencies.some(currency => currency.code && currency.code.toUpperCase() === currencyCode.toUpperCase()));
+      return { ...acc, [currencyCode]: country ? country : undefined };
+    }, {});
+    
+    
+    this.setState({ rates, currencies: Object.keys(rates), isLoading: false, countries: countryByCurrencyCode });
+  }
+
+  async getcountries() {
+    return await getAll();
   }
 
   async loadRates(baseCurrency) {
-    const { rates } = await getLatest(baseCurrency);
-    
-    this.setState({ rates, currencies: Object.keys(rates), isLoading: false  });
+    return await getLatest(baseCurrency);
   }
 
   onCurrencyChanged = currency => this.setState({ baseCurrency: currency, isLoading: true });
@@ -40,11 +61,13 @@ class CurenciesPage extends Component {
   onComponentChanged = component => this.setState({ baseComponent: component });
 
   renderCurrenciesList = () => {
-    switch (this.state.baseComponent) {
+    const { baseComponent, baseCurrency, rates, countries } = this.state;
+    
+    switch (baseComponent) {
       case "Table":
-        return <CurenciesListTable rates={this.state.rates} />;
+        return <CurenciesListTable rates={rates} countries={countries} />;
       case "Cards":
-        return <CurenciesListCards baseCurrency={this.state.baseCurrency} rates={this.state.rates} />;
+        return <CurenciesListCards baseCurrency={baseCurrency} rates={rates} countries={countries} />;
       default:
         console.log("Something bad");
     }
@@ -52,7 +75,9 @@ class CurenciesPage extends Component {
     
   render() {
     return <>
-      <h1> CurrenciesPage </h1>
+      <Segment>
+        <h1> CurrenciesPage </h1>
+      </Segment>
       <Segment style={{ display: "flex", "justifyContent": "space-between" }} >
         <CurrencySelector 
           currencies={this.state.currencies} 

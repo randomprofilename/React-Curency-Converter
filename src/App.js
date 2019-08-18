@@ -1,6 +1,6 @@
 import React from 'react';
-import './App.css';
-import 'semantic-ui-css/semantic.min.css'
+// import './App.css';
+import "semantic-ui-less/semantic.less"
 import { HashRouter } from "react-router-dom"
 import BaseLayout from "./components/BaseLayout";
 
