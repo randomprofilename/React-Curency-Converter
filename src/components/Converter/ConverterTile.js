@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Select, Input, Loader, Segment } from "semantic-ui-react";
+import { Select, Input, Loader, Segment, Icon } from "semantic-ui-react";
 import { getLatest } from "../../api/ratesApi";
 
 class ConverterTile extends Component {
@@ -52,29 +52,42 @@ class ConverterTile extends Component {
     this.setState({ targetCurrency });
   }
 
+  renderBaseData(baseAmount, baseCurrency, currencies) {
+    return <div>
+      <Select compact
+        defaultValue={baseCurrency} 
+        options={currencies.map(currency => ({ key: currency,  text: currency, value: currency }))}
+        onChange={(_, data) => this.onBaseCurrencyChange(data.value)}
+      />
+      <Input type="number" defaultValue={baseAmount} onChange={ e => this.onBaseAmountChange(e.target.value) }  />
+    </div>
+  }
+
+  renderTargetData(targetAmount, targetCurrency, currencies) {
+    return <div>
+        <Input type="number" value={targetAmount}/>
+        <Select compact
+          defaultValue={targetCurrency} 
+          options={currencies.map(currency => ({ key: currency,  text: currency, value: currency }))}
+          onChange={(_, data) => this.onTargetCurrencyChange(data.value)}
+        />
+    </div>
+  }
+
   render() {
     const { isLoading, baseAmount, baseCurrency, targetAmount, targetCurrency, currencies } = this.state;
     if (isLoading) 
         return <Loader active />
 
-    return <Segment style={{ display: "flex", justifyContent: "space-between" }} >
-      <div>
-        <Select compact
-          defaultValue={baseCurrency} 
-          options={ currencies.map(currency => ({ key: currency,  text: currency, value: currency })) }
-          onChange={ (_, data) => this.onBaseCurrencyChange(data.value) }
-        />
-        <Input type="number" defaultValue={baseAmount} onChange={ e => this.onBaseAmountChange(e.target.value) }  />
-      </div>
+    return <Segment style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }} >
+      {this.renderBaseData(baseAmount, baseCurrency, currencies)}
 
-      <div>
-        <Input type="number" value={targetAmount}/>
-        <Select compact
-          defaultValue={targetCurrency} 
-          options={ currencies.map(currency => ({ key: currency,  text: currency, value: currency })) }
-          onChange={ (_, data) => this.onTargetCurrencyChange(data.value) }
-        />
-      </div>
+      <Icon.Group size="large">
+        <Icon size="big" name="circle outline" />
+        <Icon name="angle double right" />
+      </Icon.Group>
+
+      {this.renderTargetData(targetAmount, targetCurrency, currencies)}
     </Segment>
   }
 };
