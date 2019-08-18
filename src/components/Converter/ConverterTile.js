@@ -82,10 +82,7 @@ class ConverterTile extends Component {
     return <Segment style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }} >
       {this.renderBaseData(baseAmount, baseCurrency, currencies)}
 
-      <Icon.Group size="large">
-        <Icon size="big" name="circle outline" />
-        <Icon name="angle double right" />
-      </Icon.Group>
+      <Icon disabled size="large" name="angle double right" />
 
       {this.renderTargetData(targetAmount, targetCurrency, currencies)}
     </Segment>
