@@ -1,9 +1,11 @@
 import React from "react";
-import { Select } from "semantic-ui-react";
+import { Dropdown } from "semantic-ui-react";
 
 const CurrencySelector = ({ currencies, onChange, initialValue }) => (
-  <Select
+  <Dropdown
     style={{ maxWidth: "250px" }} 
+    selection
+    search
     fluid
     defaultValue={initialValue} 
     options={currencies.map(currency => ({ key: currency,  text: currency, value: currency }))}

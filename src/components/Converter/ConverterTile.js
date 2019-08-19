@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Select, Input, Loader, Segment, Icon, Grid } from "semantic-ui-react";
+import { Input, Loader, Segment, Icon, Grid, Dropdown } from "semantic-ui-react";
 import { getLatest } from "../../api/ratesApi";
 
 class ConverterTile extends Component {
@@ -54,7 +54,9 @@ class ConverterTile extends Component {
 
   renderBaseData(baseAmount, baseCurrency, currencies) {
     return <Input 
-      label={<Select 
+      label={<Dropdown
+        selection
+        search 
         compact
         defaultValue={baseCurrency} 
         options={currencies.map(currency => ({ key: currency,  text: currency, value: currency }))}
@@ -69,7 +71,9 @@ class ConverterTile extends Component {
 
   renderTargetData(targetAmount, targetCurrency, currencies) {
     return <Input 
-      label={<Select 
+      label={<Dropdown
+        selection
+        search 
         compact
         defaultValue={targetCurrency} 
         options={currencies.map(currency => ({ key: currency,  text: currency, value: currency }))}
