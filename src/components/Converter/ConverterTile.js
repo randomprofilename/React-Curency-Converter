@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Select, Input, Loader, Segment, Icon } from "semantic-ui-react";
+import { Select, Input, Loader, Segment, Icon, Grid } from "semantic-ui-react";
 import { getLatest } from "../../api/ratesApi";
 
 class ConverterTile extends Component {
@@ -53,25 +53,33 @@ class ConverterTile extends Component {
   }
 
   renderBaseData(baseAmount, baseCurrency, currencies) {
-    return <div>
-      <Select compact
+    return <Input 
+      label={<Select 
+        compact
         defaultValue={baseCurrency} 
         options={currencies.map(currency => ({ key: currency,  text: currency, value: currency }))}
         onChange={(_, data) => this.onBaseCurrencyChange(data.value)}
-      />
-      <Input type="number" defaultValue={baseAmount} onChange={ e => this.onBaseAmountChange(e.target.value) }  />
-    </div>
+      />}
+      fluid
+      type="number" 
+      defaultValue={baseAmount} 
+      onChange={e => this.onBaseAmountChange(e.target.value)}
+    />
   }
 
   renderTargetData(targetAmount, targetCurrency, currencies) {
-    return <div>
-        <Input type="number" value={targetAmount}/>
-        <Select compact
-          defaultValue={targetCurrency} 
-          options={currencies.map(currency => ({ key: currency,  text: currency, value: currency }))}
-          onChange={(_, data) => this.onTargetCurrencyChange(data.value)}
-        />
-    </div>
+    return <Input 
+      label={<Select 
+        compact
+        defaultValue={targetCurrency} 
+        options={currencies.map(currency => ({ key: currency,  text: currency, value: currency }))}
+        onChange={(_, data) => this.onTargetCurrencyChange(data.value)}
+      />} 
+      labelPosition="right"
+      fluid
+      type="number" 
+      value={targetAmount}
+    />
   }
 
   render() {
@@ -79,12 +87,18 @@ class ConverterTile extends Component {
     if (isLoading) 
         return <Loader active />
 
-    return <Segment style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }} >
-      {this.renderBaseData(baseAmount, baseCurrency, currencies)}
-
-      <Icon disabled size="large" name="angle double right" />
-
-      {this.renderTargetData(targetAmount, targetCurrency, currencies)}
+    return <Segment>
+      <Grid stackable centered columns={3}>
+        <Grid.Column floated="left" >
+          {this.renderBaseData(baseAmount, baseCurrency, currencies)}
+        </Grid.Column>
+        <Grid.Column verticalAlign="middle" width={1} >
+          <Icon disabled size="large" name="angle double right" />
+        </Grid.Column>
+        <Grid.Column floated="right">
+          {this.renderTargetData(targetAmount, targetCurrency, currencies)}
+        </Grid.Column>
+      </Grid>
     </Segment>
   }
 };
